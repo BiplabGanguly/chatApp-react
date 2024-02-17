@@ -21,7 +21,8 @@ function Signin() {
                 body: JSON.stringify(data)
             })
                 .then((result) => result.json())
-                .then((res) => setNote(res.payload));
+                .then((res) => setNote(res.payload))
+                .catch((err)=>setNote("signin failed"))
                 setEmail("");
                 setUser("");
                 setPass("");

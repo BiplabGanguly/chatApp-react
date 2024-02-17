@@ -22,6 +22,7 @@ function Login() {
             })
                 .then((result) => result.json())
                 .then((res) => setNote(res))
+                .catch((err)=>setMessage("login failed"))
             console.log(note)
             if (note.payload === true) {
                 navigate('/chat', { state: { param: note.username } })

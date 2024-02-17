@@ -15,7 +15,6 @@ function Chat() {
   function chat() {
     let newChat = chatinput.current.value;
     const newChatuser = { user_input };
-    console.log(newChatuser);
     fetch("http://127.0.0.1:8000/chat/", {
       method: "POST",
       headers: {
@@ -24,10 +23,21 @@ function Chat() {
       },
       body: JSON.stringify(newChatuser),
     })
-      .then((result) => result.json())
-      .then((res) => setUserChat((prevChat) => [...prevChat, res]));
+      .then((result) => {
+        return result.json();
+      })
+      .then((res) => {
+        setUserChat((prevChat) => [...prevChat, res]);
+      })
+      .catch((error) => {
+        setUserChat((prevChat) => [
+          ...prevChat,
+          "Sorry!! failed to fetch data.<Br/> Please try again later.",
+        ]);
+      });
 
     setUserChat((prevChat) => [...prevChat, newChat]);
+
     chatinput.current.value = null;
   }
 
