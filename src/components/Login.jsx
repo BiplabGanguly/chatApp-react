@@ -26,6 +26,8 @@ function Login() {
       console.log(note);
       if (note.payload === true) {
         navigate("/chat", { state: { param: note.username } });
+      } else if (note.payload === false) {
+        setMessage("invalid");
       }
     } else {
       setMessage("invalid");
